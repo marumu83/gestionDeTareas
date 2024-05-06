@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Builder
-public class Tarea implements Serializable{
+public class Tarea{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,8 @@ public class Tarea implements Serializable{
 	private Date fechaAlta;
 	
 	private Date fechaFin;
+	
+	private Date ultimaModificacion;	
 	
 	private String descripcion;
 	
