@@ -5,7 +5,7 @@ package com.viewnext.gestiontareas.persistence.model;
  * 
  * Clase que reprensenta le entidad Tarea de la base de datos
  */
-import java.io.Serializable;
+
 import java.sql.Date;
 
 import jakarta.persistence.Entity;
