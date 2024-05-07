@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 const app = express()
-const port = 8081
+const port = 3000
 
 app.use(
     express.urlencoded({
@@ -26,5 +26,5 @@ app.post('/post', (req,res,) => {
 })
 
 app.listen(port, () => {
-    console.log('Se ejecuta en el puerto el localhost')
+    console.log(`Se ejecuta en el puerto el localhost ${port}`)
 })
