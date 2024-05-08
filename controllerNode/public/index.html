@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form id="fomularioRegistroTarea">
-        <p>Nombre tarea: <br><input id = "nombreTarea" type="text" name="nombre" size="40" placeholder="Escribe el nombre que quieras darle a la tarea"></p>
+    <form id="fomularioRegistroTarea" action="/" method="post">
+        <p>Nombre tarea: <br><input id = "titulo" type="text" name="nombre" size="40" placeholder="Escribe el nombre que quieras darle a la tarea"></p>
         <p>Fecha fin de tarea <br><input type="date" id="fechaFin" name="fechaFin" value="2024-05-07" min="2024-05-07" max="2025-05-07" /></p>
-        <p>Descripcion de tarea: <br><textarea id="descripcionTarea" name="textarea" rows="10" cols="50" placeholder="Especifica la tarea a realizar ahora"></textarea></p>
+        <p>Descripcion de tarea: <br><textarea id="descripcion" name="textarea" rows="10" cols="50" placeholder="Especifica la tarea a realizar ahora"></textarea></p>
         <p><button>Enviar tarea</button></p>
       </form>  
-      <script src="./script.js"></script>  
+      <script src="../app.js"></script>  
 </body>
 </html>
