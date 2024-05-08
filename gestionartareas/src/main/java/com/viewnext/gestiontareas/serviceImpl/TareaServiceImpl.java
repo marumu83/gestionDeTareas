@@ -1,6 +1,7 @@
 package com.viewnext.gestiontareas.serviceImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,12 @@ public class TareaServiceImpl implements TareaService {
 	@Autowired
 	TareaRepository tareaRepository;
 
+	@Autowired
+	private BoToEntity boToEntity;
+	
+	@Autowired
+	private EntityToBo entityToBo;
+	
 	/**
 	 * Metodo que inserta una TareaBO en la base de datos
 	 * @param TareaBO tareaBo
@@ -30,9 +37,10 @@ public class TareaServiceImpl implements TareaService {
 	 * 
 	 */
 	@Override
-	public Tarea insert(TareaBO tareaBo) {
-		// TODO Auto-generated method stub
-		return null;
+	public TareaBO insert(TareaBO tareaBo) {
+	
+		return entityToBo.tareaEntityToBo(tareaRepository.save(boToEntity.tareaBoToEntity(tareaBo)));
+		
 	}
 
 	/**
@@ -53,7 +61,7 @@ public class TareaServiceImpl implements TareaService {
 	 */
 
 	@Override
-	public Tarea update(TareaBO tareaBo) {
+	public TareaBO update(TareaBO tareaBo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -66,9 +74,9 @@ public class TareaServiceImpl implements TareaService {
 	 */
 
 	@Override
-	public Tarea findById(int id) {		
+	public TareaBO findById(int id) {		
 		
-		return tareaRepository.findById(id).orElse(null);
+		return entityToBo.tareaEntityToBo(tareaRepository.findById(id).orElse(null));
 	}
 	
 	/**
@@ -77,8 +85,11 @@ public class TareaServiceImpl implements TareaService {
 	 */
 
 	@Override
-	public List<Tarea> finAll() {		
+	public List<TareaBO> finAll() {		
 		
-		return tareaRepository.findAll();
+		List<Tarea> temp = tareaRepository.findAll();
+		System.out.println("lista tarea" +temp);
+		
+		return tareaRepository.findAll().stream().map(entityToBo::tareaEntityToBo).collect(Collectors.toList());
 	}
 }

@@ -12,14 +12,14 @@ import com.viewnext.gestiontareas.service.bo.TareaBO;
  */
 public interface TareaService {
 	
-	Tarea insert (TareaBO tareaBo);
+	TareaBO insert (TareaBO tareaBo);
 	
 	void delete ();
 	
-	Tarea update (TareaBO tareaBo);
+	TareaBO update (TareaBO tareaBo);
 	
-	Tarea findById(int id);
+	TareaBO findById(int id);
 	
-	List<Tarea> finAll();
+	List<TareaBO> finAll();
 
 }
