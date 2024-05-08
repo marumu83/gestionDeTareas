@@ -1,15 +1,20 @@
 package com.viewnext.gestiontareas.controller;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viewnext.gestiontareas.persistence.model.Tarea;
 import com.viewnext.gestiontareas.service.TareaService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Clase que gestiona las peticiones REST de la clase Tarea
@@ -18,24 +23,33 @@ import com.viewnext.gestiontareas.service.TareaService;
  *
  */
 
-@Controller
-@RequestMapping("/tarea")
+@RestController
+@RequestMapping("/api/tareas")
 public class TareaController {
 	
 	@Autowired
 	private TareaService tareaService;
 	
-	@GetMapping("/holamundo")
-	public String prueba() {
-		return "HolaMundo";
+	
+	/**
+	 * Metodo inicial para comprobacion de inicio de aplicación
+	 * @return String
+	 */
+	
+	@GetMapping("/")	
+	public String holaMundo(){
+		
+		System.out.println("entra");
+
+		return "Esqueleto inicializado";
+
 	}
-	
-	
-	@GetMapping("/all")
-	public List<Tarea> getAll(){
-		return tareaService.finAll();
-	}
-	
 	
 
+	@PostMapping("/nueva")
+	public ResponseEntity <Tarea> createUser(@RequestBody Tarea tarea, HttpServletRequest request){
+		
+		System.out.println(tarea);
+		return ResponseEntity.ok(tarea);
+	}
 }

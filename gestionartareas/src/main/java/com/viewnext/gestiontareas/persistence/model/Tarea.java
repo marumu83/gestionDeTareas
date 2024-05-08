@@ -7,6 +7,7 @@ package com.viewnext.gestiontareas.persistence.model;
  */
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,11 +32,11 @@ public class Tarea{
 	
 	private String titulo;
 	
-	private Date fechaAlta;
+	private LocalDate fechaAlta;
 	
-	private Date fechaFin;
+	private LocalDate fechaFin;
 	
-	private Date ultimaModificacion;	
+	private LocalDate ultimaModificacion;	
 	
 	private String descripcion;
 	
