@@ -15,12 +15,19 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-  const { titulo, descripcion, fechaFin } = req.body;
+
+  //se crean los valores de alta con el dia actual y por defecto no finalizada
+  fechaAlta = new Date().toISOString().slice(0, 10);
+  finalizada = new Boolean(false);
+
+  const { titulo, descripcion, fechaFin} = req.body;
   try {
     const response = await axios.post(`${process.env.API_URL}/nueva`, {
       titulo,
       descripcion,
       fechaFin,
+      fechaAlta,
+      finalizada
     });
     console.log(response.data);
     res.send('tarea registrada correctamente');
@@ -30,8 +37,9 @@ app.post('/', async (req, res) => {
   }
 });
 
+app.get
+
 // Iniciar el servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);
 });
