@@ -45,7 +45,6 @@ public class TareaController {
 
 	}
 	
-
 	@PostMapping("/nueva")
 	public ResponseEntity <Tarea> createUser(@RequestBody Tarea tarea, HttpServletRequest request){
 		
