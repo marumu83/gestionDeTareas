@@ -10,7 +10,7 @@ dotenv.config();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public'))); // Sirve archivos estáticos en la carpeta public
 
-app.get('/', (req, res) => {.gitignore
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html')); // Sirve el formulario HTML en la ruta /
 });
 
@@ -37,7 +37,6 @@ app.post('/', async (req, res) => {
   }
 });
 
-app.get
 
 // Iniciar el servidor
 app.listen(process.env.PORT, () => {
