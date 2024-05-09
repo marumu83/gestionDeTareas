@@ -37,7 +37,18 @@ app.post('/', async (req, res) => {
   }
 });
 
-
+app.get('/todos', async(req, res) => {
+  try {
+    const response = await axios.get(`${process.env.API_URL}/all`);
+    const lista = response.data;
+    console.log(response.data);
+    
+    res.status(200).json(lista)
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al registrar tarea');
+  }
+});
 
 // Iniciar el servidor
 app.listen(process.env.PORT, () => {
