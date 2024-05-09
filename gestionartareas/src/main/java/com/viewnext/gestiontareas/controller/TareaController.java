@@ -44,12 +44,10 @@ public class TareaController {
 	@Autowired
 	private DtoToBo dtoToBo;
 	
-	@CrossOrigin()
-
+	
 	@PostMapping("/nueva")
 	public ResponseEntity <TareaDTO> createUser(@RequestBody TareaDTO tarea, HttpServletRequest request){
 	
-		System.out.println(tarea);
 		tareaService.insert(dtoToBo.tareaDtoToBo(tarea));
 		return ResponseEntity.ok(tarea);
 	}
@@ -82,14 +80,9 @@ public class TareaController {
 
 	}
 	
-	/**
-	 * Metodo para borrar una tarea por id
-	 * @param int id
-	 * 
-	 */
-	@DeleteMapping("/delete/{id}")
-	public void deleteTarea(@PathVariable("id") int id) {
-		
-		tareaService.delete(id);
+	@DeleteMapping("/eliminar/{id}")
+	public void deleteTarea(@PathVariable int id) {
+		tareaService.deleteTarea(id);
 	}
+	
 }
