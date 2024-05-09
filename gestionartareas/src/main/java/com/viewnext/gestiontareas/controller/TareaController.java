@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,10 +44,12 @@ public class TareaController {
 	@Autowired
 	private DtoToBo dtoToBo;
 	
-	
+	@CrossOrigin()
+
 	@PostMapping("/nueva")
 	public ResponseEntity <TareaDTO> createUser(@RequestBody TareaDTO tarea, HttpServletRequest request){
 	
+		System.out.println(tarea);
 		tareaService.insert(dtoToBo.tareaDtoToBo(tarea));
 		return ResponseEntity.ok(tarea);
 	}
@@ -77,5 +80,16 @@ public class TareaController {
 
 		return boToDto.tareaBoToDto(tareaService.findById(id));
 
+	}
+	
+	/**
+	 * Metodo para borrar una tarea por id
+	 * @param int id
+	 * 
+	 */
+	@DeleteMapping("/delete/{id}")
+	public void deleteTarea(@PathVariable("id") int id) {
+		
+		tareaService.delete(id);
 	}
 }

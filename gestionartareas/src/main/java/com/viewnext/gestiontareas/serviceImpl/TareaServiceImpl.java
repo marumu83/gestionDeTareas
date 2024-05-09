@@ -49,8 +49,11 @@ public class TareaServiceImpl implements TareaService {
 	 */
 	
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
+	public void delete(int id) {
+		
+		Tarea tarea = tareaRepository.findById(id).orElse(null);
+		
+		tareaRepository.delete(tarea);
 
 	}
 	
