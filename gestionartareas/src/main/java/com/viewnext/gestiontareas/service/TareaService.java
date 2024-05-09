@@ -14,7 +14,7 @@ public interface TareaService {
 	
 	TareaBO insert (TareaBO tareaBo);
 	
-	void delete ();
+	void delete (int id);
 	
 	TareaBO update (TareaBO tareaBo);
 	

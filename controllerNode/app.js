@@ -50,6 +50,22 @@ app.get('/todos', async(req, res) => {
   }
 });
 
+app.get('/delete/:id', async(req, res) =>{ 
+  
+  const id = req.params.id;
+  console.log(id);
+  
+  try {
+    const response = await axios.delete(`${process.env.API_URL}/delete/`, id);
+     res.status(200).json(lista)
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al registrar tarea');
+  }
+
+});
+
+
 // Iniciar el servidor
 app.listen(process.env.PORT, () => {
   console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);
