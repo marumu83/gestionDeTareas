@@ -32,11 +32,11 @@ public class Tarea{
 	
 	private String titulo;
 	
-	private LocalDate fechaAlta;
+	private Date fechaAlta;
 	
-	private LocalDate fechaFin;
+	private Date fechaFin;
 	
-	private LocalDate ultimaModificacion;	
+	private Date ultimaModificacion;	
 	
 	private String descripcion;
 	

@@ -49,7 +49,7 @@ public class TareaServiceImpl implements TareaService {
 	 */
 	
 	@Override
-	public void delete(int id) {
+	public void deleteTarea(int id) {
 		
 		Tarea tarea = tareaRepository.findById(id).orElse(null);
 		
