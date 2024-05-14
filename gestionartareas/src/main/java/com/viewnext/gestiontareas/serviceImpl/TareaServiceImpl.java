@@ -65,8 +65,21 @@ public class TareaServiceImpl implements TareaService {
 
 	@Override
 	public TareaBO update(TareaBO tareaBo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		TareaBO tareaBo2 = entityToBo.tareaEntityToBo(tareaRepository.findById(tareaBo.getId()).orElse(null));
+		
+		System.out.println(tareaBo2);
+		System.out.println(tareaBo);
+		
+		tareaBo2.setDescripcion(tareaBo.getDescripcion());
+		tareaBo2.setFechaFin(tareaBo.getFechaFin());
+		tareaBo2.setTitulo(tareaBo.getTitulo());
+		tareaBo2.setUltimaModificacion(tareaBo.getUltimaModificacion());
+		tareaBo2.setFinalizada(tareaBo.isFinalizada());
+		
+		System.out.println(tareaBo2);
+		
+		return entityToBo.tareaEntityToBo(tareaRepository.save(boToEntity.tareaBoToEntity(tareaBo2)));
 	}
 	
 	/**
