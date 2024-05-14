@@ -71,17 +71,42 @@ app.post('/delete', async(req, res) =>{
 
 });
 
-
 app.post('/modificar', async(req, res) =>{ 
 
   const id = req.body.id; 
   console.log(id)
   let temp= await axios.get(`http://localhost:8080/api/tareas/id/${id}`);
   let tarea= temp.data
-  console.log(tarea)
-  
+  console.log(tarea)  
   res.render('actualiza', {tarea:tarea});
 
+});
+
+app.post('/update', async (req, res) => {
+
+  let ultimaModificacion = new Date().toISOString().slice(0, 10);
+  let fechaAlta = req.body.fechaAlta
+  let tarea = req.body
+  let id = tarea.id
+  const { titulo, descripcion, fechaFin} = req.body;
+  let finalizada = req.body.finalizada === "on";
+  try {
+    const response = await axios.put(`http://localhost:8080/api/tareas/update`, {
+      id,
+      titulo,
+      descripcion,
+      fechaFin,
+      fechaAlta,
+      ultimaModificacion,
+      finalizada
+    });
+    const lis = await axios.get(`http://localhost:8080/api/tareas/all`);
+    const lista = lis.data;
+    res.render('lista', {lista:lista})
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al modificar la tarea');
+  }
 });
 
 // Redireccion por defecto si no existe la ruta

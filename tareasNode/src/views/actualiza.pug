@@ -7,7 +7,7 @@ html(lang="en")
         link(rel="stylesheet", type="text/css", href="/css/style.css")
     body
 
-      form#fomularioRegistroTarea(action='/modificar', method='post')
+      form#fomularioRegistroTarea(action='/update', method='post')
         p
           |  Título de nueva tarea
           br
@@ -21,4 +21,10 @@ html(lang="en")
           br
           textarea#descripcion(name='descripcion', rows='10', cols='50', placeholder= tarea.descripcion)
         p
+          | Finalizada:
+          br
+          input#finalizada(type='checkbox', name='finalizada', checked=tarea.finalizada)
+        p
+          input(type='hidden', name='id', value=tarea.id)
+         
           button(type='submit') Enviar tarea
