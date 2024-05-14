@@ -59,8 +59,9 @@ app.delete('/delete/:id', async(req, res) =>{
   console.log(id);
   
   try {
-    const response = await axios.delete(`${process.env.API_URL}/delete/`, id);
-     res.status(200).json(lista)
+    const response = await axios.delete(`${process.env.API_URL}/eliminar/${id}`);
+     res.status(200);
+     res.end();
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al registrar tarea');

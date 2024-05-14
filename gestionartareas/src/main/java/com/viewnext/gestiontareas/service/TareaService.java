@@ -1,8 +1,6 @@
 package com.viewnext.gestiontareas.service;
 
 import java.util.List;
-
-import com.viewnext.gestiontareas.persistence.model.Tarea;
 import com.viewnext.gestiontareas.service.bo.TareaBO;
 
 /**

@@ -7,7 +7,7 @@ package com.viewnext.gestiontareas.persistence.model;
  */
 
 import java.sql.Date;
-import java.time.LocalDate;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
