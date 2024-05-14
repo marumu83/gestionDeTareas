@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Configuration;
 
 import com.viewnext.gestiontareas.controller.dto.TareaDTO;
+import com.viewnext.gestiontareas.controller.dto.UsuarioDTO;
 import com.viewnext.gestiontareas.service.bo.TareaBO;
+import com.viewnext.gestiontareas.service.bo.UsuarioBO;
 
 /**
  * @author Manuel Rubio
@@ -25,6 +27,10 @@ public class BoToDto {
 		
 		return modelMapper.map(tareaBo, TareaDTO.class);
 		
+	}
+	public UsuarioDTO usuarioBoToDto(UsuarioBO usuarioBO) {
+		
+		return modelMapper.map(usuarioBO, UsuarioDTO.class);
 	}
 
 }
