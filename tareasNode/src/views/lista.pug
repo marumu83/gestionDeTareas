@@ -1,0 +1,52 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", type="text/css", href="/css/style.css")
+    body
+      form#fomularioRegistroTarea(action='/crear', method='post')
+        p
+          | Nombre tarea:
+          br
+          input#titulo(type='text', name='titulo', size='40', placeholder='Escribe el nombre que quieras darle a la tarea')
+        p
+          | Fecha fin de tarea
+          br
+          input#fechaFin(type='date', name='fechaFin', value='2024-05-07', min='2024-05-07', max='2025-05-07')
+        p
+          | Descripcion de tarea:
+          br
+          textarea#descripcion(name='descripcion', rows='10', cols='50', placeholder='Especifica la tarea a realizar ahora')
+        p
+          button(type='submit') Enviar tarea
+
+    table 
+      thead 
+        tr 
+          th Id 
+          th Título 
+          th Descripción
+          th Fecha de alta
+          th Fecha de fin
+          th Última modificación
+          th Finalizada
+          th Acciones sobre la tarea
+      tbody  
+        each tarea in lista
+          -var id= tarea.id
+          tr 
+            td= id
+            td= tarea.titulo 
+            td= tarea.descripcion
+            td= tarea.fechaAlta
+            td= tarea.fechaFin
+            td= tarea.ultimaModificacion
+            td= tarea.finalizada
+            td
+              form#fomularioborrar(action='/delete', method='post')
+                p
+                  button(type='submit') Borrar
+
+        script(src="app.js")
