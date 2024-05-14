@@ -27,11 +27,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class TareaController {
 	
 	
-	private TareaService tareaService;
+	private final TareaService tareaService;
 		
-	private BoToDto boToDto;
+	private final BoToDto boToDto;
 		
-	private DtoToBo dtoToBo;
+	private final DtoToBo dtoToBo;
 	
 	public TareaController(TareaService tareaService, BoToDto boToDto, DtoToBo dtoToBo) {
 		this.tareaService=tareaService;
@@ -41,7 +41,7 @@ public class TareaController {
 	
 	
 	@PostMapping("/nueva")
-	public ResponseEntity <TareaDTO> createUser(@RequestBody TareaDTO tarea, HttpServletRequest request){
+	public ResponseEntity <TareaDTO> createTarea(@RequestBody TareaDTO tarea, HttpServletRequest request){
 	
 		tareaService.insert(dtoToBo.tareaDtoToBo(tarea));
 		return ResponseEntity.ok(tarea);

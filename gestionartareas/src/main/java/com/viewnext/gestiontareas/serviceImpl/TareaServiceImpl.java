@@ -1,8 +1,6 @@
 package com.viewnext.gestiontareas.serviceimpl;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,16 +62,11 @@ public class TareaServiceImpl implements TareaService {
 		
 		TareaBO tareaBo2 = entityToBo.tareaEntityToBo(tareaRepository.findById(tareaBo.getId()).orElse(null));
 		
-		System.out.println(tareaBo2);
-		System.out.println(tareaBo);
-		
 		tareaBo2.setDescripcion(tareaBo.getDescripcion());
 		tareaBo2.setFechaFin(tareaBo.getFechaFin());
 		tareaBo2.setTitulo(tareaBo.getTitulo());
 		tareaBo2.setUltimaModificacion(tareaBo.getUltimaModificacion());
 		tareaBo2.setFinalizada(tareaBo.isFinalizada());
-		
-		System.out.println(tareaBo2);
 		
 		return entityToBo.tareaEntityToBo(tareaRepository.save(boToEntity.tareaBoToEntity(tareaBo2)));
 	}
@@ -98,10 +91,7 @@ public class TareaServiceImpl implements TareaService {
 
 	@Override
 	public List<TareaBO> findAll() {		
-		
-		List<Tarea> temp = tareaRepository.findAll();
-		System.out.println("lista tarea" +temp);
-		
-		return tareaRepository.findAll().stream().map(entityToBo::tareaEntityToBo).collect(Collectors.toList());
+				
+		return tareaRepository.findAll().stream().map(entityToBo::tareaEntityToBo).toList();
 	}
 }
