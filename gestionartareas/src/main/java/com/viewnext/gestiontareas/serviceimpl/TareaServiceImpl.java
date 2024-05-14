@@ -1,12 +1,15 @@
 package com.viewnext.gestiontareas.serviceimpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.viewnext.gestiontareas.persistence.model.Tarea;
 import com.viewnext.gestiontareas.persistence.repository.TareaRepository;
 import com.viewnext.gestiontareas.service.TareaService;
 import com.viewnext.gestiontareas.service.bo.TareaBO;
-
 
 /**
  * @author Manuel Rubio
@@ -14,32 +17,18 @@ import com.viewnext.gestiontareas.service.bo.TareaBO;
  * Clase que desarrolla los metodos de la interfaz TareaService
  *
  */
+
 @Service
 public class TareaServiceImpl implements TareaService {
 	
+	@Autowired
+	TareaRepository tareaRepository;
 
-	private final TareaRepository tareaRepository;
-
-
-	private final BoToEntity boToEntity;
+	@Autowired
+	private BoToEntity boToEntity;
 	
-	
-	private final  EntityToBo entityToBo;
-	
-	/**
-	 * Constructor parametrizado que inyecta e inicializa las dependencias
-	 * @param tareaRepository
-	 * @param boToEntity
-	 * @param entityToBo
-	 * 
-	 */
-	
-	public TareaServiceImpl(TareaRepository tareaRepository, BoToEntity boToEntity,EntityToBo entityToBo) {
-		
-		this.tareaRepository = tareaRepository;
-		this.boToEntity = boToEntity;
-		this.entityToBo = entityToBo;
-	}
+	@Autowired
+	private EntityToBo entityToBo;
 	
 	/**
 	 * Metodo que inserta una TareaBO en la base de datos
@@ -75,19 +64,23 @@ public class TareaServiceImpl implements TareaService {
 	 */
 
 	@Override
-    public TareaBO update(TareaBO tareaBo) {
-       
-        TareaBO tareaBo2 = entityToBo.tareaEntityToBo(tareaRepository.findById(tareaBo.getId()).orElse(null));
-     
-       
-        tareaBo2.setDescripcion(tareaBo.getDescripcion());
-        tareaBo2.setFechaFin(tareaBo.getFechaFin());
-        tareaBo2.setTitulo(tareaBo.getTitulo());
-        tareaBo2.setUltimaModificacion(tareaBo.getUltimaModificacion());
-        tareaBo2.setFinalizada(tareaBo.isFinalizada());
-       
-        return entityToBo.tareaEntityToBo(tareaRepository.save(boToEntity.tareaBoToEntity(tareaBo2)));
-    }
+	public TareaBO update(TareaBO tareaBo) {
+		
+		TareaBO tareaBo2 = entityToBo.tareaEntityToBo(tareaRepository.findById(tareaBo.getId()).orElse(null));
+		
+		System.out.println(tareaBo2);
+		System.out.println(tareaBo);
+		
+		tareaBo2.setDescripcion(tareaBo.getDescripcion());
+		tareaBo2.setFechaFin(tareaBo.getFechaFin());
+		tareaBo2.setTitulo(tareaBo.getTitulo());
+		tareaBo2.setUltimaModificacion(tareaBo.getUltimaModificacion());
+		tareaBo2.setFinalizada(tareaBo.isFinalizada());
+		
+		System.out.println(tareaBo2);
+		
+		return entityToBo.tareaEntityToBo(tareaRepository.save(boToEntity.tareaBoToEntity(tareaBo2)));
+	}
 	
 	/**
 	 * Metodo que busca una tarea de la base de datos por id
@@ -108,9 +101,11 @@ public class TareaServiceImpl implements TareaService {
 	 */
 
 	@Override
-	public List<TareaBO> finAll() {		
+	public List<TareaBO> findAll() {		
 		
+		List<Tarea> temp = tareaRepository.findAll();
+		System.out.println("lista tarea" +temp);
 		
-		return tareaRepository.findAll().stream().map(entityToBo::tareaEntityToBo).toList();
+		return tareaRepository.findAll().stream().map(entityToBo::tareaEntityToBo).collect(Collectors.toList());
 	}
 }

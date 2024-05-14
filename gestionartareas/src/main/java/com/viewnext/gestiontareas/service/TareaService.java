@@ -18,6 +18,6 @@ public interface TareaService {
 	
 	TareaBO findById(int id);
 	
-	List<TareaBO> finAll();
+	List<TareaBO> findAll();
 
 }

@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Configuration;
 
 import com.viewnext.gestiontareas.persistence.model.Tarea;
+import com.viewnext.gestiontareas.persistence.model.Usuario;
 import com.viewnext.gestiontareas.service.bo.TareaBO;
+import com.viewnext.gestiontareas.service.bo.UsuarioBO;
 
 /**
  * @author Manuel Rubio
@@ -27,4 +29,8 @@ public class BoToEntity {
 		return modelMapper.map(tareaBo, Tarea.class);
 	}
 
+	public Usuario usuarioBoToEntity(UsuarioBO usuarioBo) {
+		
+		return modelMapper.map(usuarioBo, Usuario.class);
+	}
 }
