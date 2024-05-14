@@ -45,7 +45,8 @@ html(lang="en")
             td= tarea.ultimaModificacion
             td= tarea.finalizada
             td
-              form#fomularioborrar(action='/delete', method='post')
+              form#formularioborrar(action='/delete', method='post')
+                input(type='hidden', name='id', value=id)
                 p
                   button(type='submit') Borrar
 

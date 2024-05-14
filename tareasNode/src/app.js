@@ -23,9 +23,9 @@ app.use(require('./routes/lista.routes'))
 app.post('/crear', async (req, res) => {
 
     //se crean los valores de alta con el dia actual y por defecto no finalizada
-    fechaAlta = new Date().toISOString().slice(0, 10);
-    ultimaModificacion = new Date().toISOString().slice(0, 10);
-    finalizada = new Boolean(false);
+    let fechaAlta = new Date().toISOString().slice(0, 10);
+    let ultimaModificacion = new Date().toISOString().slice(0, 10);
+    let finalizada = Boolean(false);
   
     const { titulo, descripcion, fechaFin} = req.body;
     try {
@@ -54,16 +54,15 @@ app.get('/lista', async (req, res)=>{
     
 })
 
-app.delete('/:id', async(req, res) =>{ 
+app.post('/delete', async(req, res) =>{ 
   
-    console.log('entra')
-    const id = req.params.id;
-    console.log(id);
-  
+    const id = req.body.id;  
   try {
     const response = await axios.delete(`http://localhost:8080/api/tareas/eliminar/${id}`);
      res.status(200);
-     res.end();
+     const lis = await axios.get(`http://localhost:8080/api/tareas/all`);
+     const lista = lis.data;
+     res.render('lista', {lista:lista})
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al registrar tarea');
@@ -75,11 +74,6 @@ app.delete('/:id', async(req, res) =>{
 app.use((req, res)=>{
     res.sendFile(path.join(__dirname, '../public/404.html'))
 })
-
-
-
-
-
 
 app.listen(3000, ()=>{
 
