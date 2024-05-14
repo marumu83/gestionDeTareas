@@ -70,6 +70,14 @@ app.post('/delete', async(req, res) =>{
 
 });
 
+
+app.post('/modificar', async(req, res) =>{ 
+  let tarea = req.body
+  console.log(tarea)
+  res.render('actualiza', {tarea});
+
+});
+
 // Redireccion por defecto si no existe la ruta
 app.use((req, res)=>{
     res.sendFile(path.join(__dirname, '../public/404.html'))

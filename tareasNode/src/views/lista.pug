@@ -35,9 +35,8 @@ html(lang="en")
           th Acciones sobre la tarea
       tbody  
         each tarea in lista
-          -var id= tarea.id
           tr 
-            td= id
+            td= tarea.id
             td= tarea.titulo 
             td= tarea.descripcion
             td= tarea.fechaAlta
@@ -46,8 +45,12 @@ html(lang="en")
             td= tarea.finalizada
             td
               form#formularioborrar(action='/delete', method='post')
-                input(type='hidden', name='id', value=id)
+                input(type='hidden', name='id', value=tarea.id)
                 p
                   button(type='submit') Borrar
+              form#formulariomodificar(action='/modificar', method='post')
+                input(type='hidden', name='tarea', value=tarea)
+                p
+                  button(type='submit') modificar
 
         script(src="app.js")
