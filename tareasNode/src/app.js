@@ -56,7 +56,8 @@ app.get('/lista', async (req, res)=>{
 
 app.post('/delete', async(req, res) =>{ 
   
-    const id = req.body.id;  
+    const id = req.body.id; 
+    console.log(id) 
   try {
     const response = await axios.delete(`http://localhost:8080/api/tareas/eliminar/${id}`);
      res.status(200);
@@ -72,9 +73,14 @@ app.post('/delete', async(req, res) =>{
 
 
 app.post('/modificar', async(req, res) =>{ 
-  let tarea = req.body
+
+  const id = req.body.id; 
+  console.log(id)
+  let temp= await axios.get(`http://localhost:8080/api/tareas/id/${id}`);
+  let tarea= temp.data
   console.log(tarea)
-  res.render('actualiza', {tarea});
+  
+  res.render('actualiza', {tarea:tarea});
 
 });
 

@@ -9,16 +9,16 @@ html(lang="en")
 
       form#fomularioRegistroTarea(action='/modificar', method='post')
         p
-          | Nuevo nombre tarea:
+          |  Título de nueva tarea
           br
-          input#titulo(type='text', name='titulo', size='40', placeholder= ${tarea.titulo})
+          input#titulo(type='text', name='titulo', size='40', placeholder= tarea.titulo)
         p
           | Fecha fin de tarea
           br
-          input#fechaFin(type='date', name='fechaFin', value='2024-05-07', min='2024-05-07', max='2025-05-07')
+          input#fechaFin(type='date', name='fechaFin', value= tarea.fechaFin, min='2024-05-07', max='2025-05-07')
         p
           | Nueva descripción de tarea:
           br
-          textarea#descripcion(name='descripcion', rows='10', cols='50', placeholder='Especifica la nueva descripción')
+          textarea#descripcion(name='descripcion', rows='10', cols='50', placeholder= tarea.descripcion)
         p
           button(type='submit') Enviar tarea

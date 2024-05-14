@@ -49,7 +49,7 @@ html(lang="en")
                 p
                   button(type='submit') Borrar
               form#formulariomodificar(action='/modificar', method='post')
-                input(type='hidden', name='tarea', value=tarea)
+                input(type='hidden', name='id', value=tarea.id)
                 p
                   button(type='submit') modificar
 
