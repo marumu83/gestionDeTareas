@@ -43,10 +43,6 @@ public class TareaServiceImpl implements TareaService {
 		
 	}
 
-	/**
-	 * Metodo que borra una Tarea de la base de datos
-	 * 
-	 */
 	
 	@Override
 	public void deleteTarea(int id) {
