@@ -1,11 +1,12 @@
-package com.viewnext.gestiontareas.serviceImpl;
+package com.viewnext.gestiontareas.serviceimpl;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import com.viewnext.gestiontareas.persistence.model.Tarea;
+import com.viewnext.gestiontareas.persistence.model.Usuario;
 import com.viewnext.gestiontareas.service.bo.TareaBO;
+import com.viewnext.gestiontareas.service.bo.UsuarioBO;
 
 /**
  * @author Manuel Rubio
@@ -13,14 +14,23 @@ import com.viewnext.gestiontareas.service.bo.TareaBO;
  *
  */
 @Configuration
-public class BoToEntity {
+public class BoToEntity {	
 	
-	@Autowired
-	ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
+	
+	public BoToEntity(ModelMapper modelMapper) {
+		
+		this.modelMapper = modelMapper;
+	}
+	
 	
 	public Tarea tareaBoToEntity(TareaBO tareaBo) {
 		
 		return modelMapper.map(tareaBo, Tarea.class);
 	}
 
+	public Usuario usuarioBoToEntity(UsuarioBO usuarioBo) {
+		
+		return modelMapper.map(usuarioBo, Usuario.class);
+	}
 }

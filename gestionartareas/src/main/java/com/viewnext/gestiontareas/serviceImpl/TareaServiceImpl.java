@@ -1,4 +1,4 @@
-package com.viewnext.gestiontareas.serviceImpl;
+package com.viewnext.gestiontareas.serviceimpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,10 +43,6 @@ public class TareaServiceImpl implements TareaService {
 		
 	}
 
-	/**
-	 * Metodo que borra una Tarea de la base de datos
-	 * 
-	 */
 	
 	@Override
 	public void deleteTarea(int id) {
@@ -101,7 +97,7 @@ public class TareaServiceImpl implements TareaService {
 	 */
 
 	@Override
-	public List<TareaBO> finAll() {		
+	public List<TareaBO> findAll() {		
 		
 		List<Tarea> temp = tareaRepository.findAll();
 		System.out.println("lista tarea" +temp);

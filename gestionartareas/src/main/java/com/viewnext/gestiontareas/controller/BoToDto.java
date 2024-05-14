@@ -1,7 +1,6 @@
 package com.viewnext.gestiontareas.controller;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import com.viewnext.gestiontareas.controller.dto.TareaDTO;
@@ -16,8 +15,11 @@ import com.viewnext.gestiontareas.service.bo.TareaBO;
 @Configuration
 public class BoToDto {
 	
-	@Autowired
-	ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
+	
+	public BoToDto (ModelMapper modelMapper){
+		this.modelMapper= modelMapper;
+	}
 	
 	public TareaDTO tareaBoToDto(TareaBO tareaBo) {
 		
