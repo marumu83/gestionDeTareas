@@ -46,14 +46,6 @@ app.post('/crear', async (req, res) => {
     }
   });
 
-app.get('/lista', async (req, res)=>{
-
-    const response = await axios.get(`http://localhost:8080/api/tareas/all`);
-    const lista = response.data;
-    res.render('lista', {lista:lista})
-    
-})
-
 app.post('/delete', async(req, res) =>{ 
   
     const id = req.body.id; 
@@ -82,6 +74,8 @@ app.post('/modificar', async(req, res) =>{
 
 });
 
+
+//
 app.post('/update', async (req, res) => {
 
   let ultimaModificacion = new Date().toISOString().slice(0, 10);

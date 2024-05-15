@@ -10,9 +10,9 @@ import com.viewnext.gestiontareas.service.TareaService;
 import com.viewnext.gestiontareas.service.bo.TareaBO;
 
 /**
- * Clase que implementa los metodos de la interfaz TareaService
  * @author Manuel Rubio
  * @author Jorge Garrido
+ * Clase que desarrolla los metodos de la interfaz TareaService
  *
  */
 
@@ -34,7 +34,6 @@ public class TareaServiceImpl implements TareaService {
 	 * @return Tarea
 	 * 
 	 */
-	
 	@Override
 	public TareaBO insert(TareaBO tareaBo) {
 	
@@ -42,11 +41,7 @@ public class TareaServiceImpl implements TareaService {
 		
 	}
 
-	/**
-	 * Metodo que borra una tarea de la base de datos
-	 * buscando por su identificador
-	 * @param int id
-	 */
+	
 	@Override
 	public void deleteTarea(int id) {
 		
