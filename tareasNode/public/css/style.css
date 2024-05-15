@@ -1,5 +1,5 @@
 body{
-    background-color: #6AEAF9;
+    background-image: url(./imagenfondo.jpg);
     margin: 0;
     display: flex;
     align-items: center;
@@ -7,6 +7,20 @@ body{
     flex-direction: column;
     min-height: 100vh;
     color: #888;
+}
+
+.fecha{
+    margin-left: 35%;
+}
+
+.boton_enviar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 25%;
+    margin-bottom: 20px;
+    min-width: 200px;
 }
 
 h1{
@@ -34,6 +48,8 @@ th,tr,td{
 	height:45px;
 	vertical-align:middle;
 	text-align:center;
+    background-color: #FFF2D7;
+    opacity: 75%;
 }
 th{
 	color:#fff;
