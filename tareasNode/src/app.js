@@ -46,6 +46,14 @@ app.post('/crear', async (req, res) => {
     }
   });
 
+app.get('/lista', async (req, res)=>{
+
+    const response = await axios.get(`http://localhost:8080/api/tareas/all`);
+    const lista = response.data;
+    res.render('lista', {lista:lista})
+    
+})
+
 app.post('/delete', async(req, res) =>{ 
   
     const id = req.body.id; 
@@ -74,8 +82,6 @@ app.post('/modificar', async(req, res) =>{
 
 });
 
-
-//
 app.post('/update', async (req, res) => {
 
   let ultimaModificacion = new Date().toISOString().slice(0, 10);
@@ -103,14 +109,30 @@ app.post('/update', async (req, res) => {
   }
 });
 
+app.post('/registrarusuario', async (req, res) => {
+
+  const { nombre, email, password} = req.body;
+  try {
+    console.log(req.body);
+    const response = await axios.post(`http://localhost:8080/api/usuarios/nuevo`, {
+      nombre,
+      email,
+      password,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al registrar al usuario');
+  }
+});
+
 // Redireccion por defecto si no existe la ruta
 app.use((req, res)=>{
-    res.sendFile(path.join(__dirname, '../public/404.html'))
+  res.sendFile(path.join(__dirname, '../public/404.html'))
 })
 
 app.listen(3000, ()=>{
 
-    console.log('Servidor node levantado')
+  console.log('Servidor node levantado')
 
 })
 
