@@ -24,5 +24,7 @@ public interface UsuarioService{
 	List<UsuarioBO> findAll();
 	
 	UsuarioBO findByNombre(String nombre);
+	
+	UsuarioBO findByEmail(String email);
 
 }

@@ -41,6 +41,11 @@ public class TareaServiceImpl implements TareaService {
 		
 	}
 
+	/*
+	 * Metodo publico que borra una tarea de la
+	 * base de datos buscandola por id
+	 * @param int id
+	 */
 	
 	@Override
 	public void deleteTarea(int id) {

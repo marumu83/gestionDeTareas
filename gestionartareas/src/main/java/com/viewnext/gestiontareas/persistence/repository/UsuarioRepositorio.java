@@ -15,5 +15,7 @@ import com.viewnext.gestiontareas.persistence.model.Usuario;
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer>{
 	
 	Usuario findByNombre(String nombre);
+	
+	Usuario findByEmail(String email);
 
 }

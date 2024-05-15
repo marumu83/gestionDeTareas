@@ -87,5 +87,11 @@ public class UsuarioController {
 		
 		return boToDto.usuarioBoToDto(usuarioService.findByNombre(nombre));
 	}
+	
+	@GetMapping("/email/{email}")
+	public UsuarioDTO getByEmail(@PathVariable ("email") String email) {
+		
+		return boToDto.usuarioBoToDto(usuarioService.findByNombre(email));
+	}
 
 }
