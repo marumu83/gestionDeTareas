@@ -2,4 +2,4 @@
 /tareasNode/node_modules
 /controllerNode/node_modules
 /.sonarlint
-
+.sonarlint
