@@ -22,5 +22,7 @@ public interface UsuarioService{
 	UsuarioBO findById(int id);
 	
 	List<UsuarioBO> findAll();
+	
+	UsuarioBO findByNombre(String nombre);
 
 }

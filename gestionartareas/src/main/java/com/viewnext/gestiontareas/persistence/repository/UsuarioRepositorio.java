@@ -13,5 +13,7 @@ import com.viewnext.gestiontareas.persistence.model.Usuario;
  */
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer>{
+	
+	Usuario findByNombre(String nombre);
 
 }

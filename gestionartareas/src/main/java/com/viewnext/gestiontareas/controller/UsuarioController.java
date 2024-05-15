@@ -1,6 +1,10 @@
 package com.viewnext.gestiontareas.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,6 +74,18 @@ public class UsuarioController {
 		usuarioService.insert(dtoToBo.usuarioDtoToBo(usuarioDTO));
 		
 		return ResponseEntity.ok(usuarioDTO);
+	}
+	
+	@GetMapping("/all")
+	public List<UsuarioDTO> getAll(){
+		
+		return usuarioService.findAll().stream().map(boToDto::usuarioBoToDto).toList();
+	}
+	
+	@GetMapping("/nombre/{nombre}")
+	public UsuarioDTO getByName(@PathVariable ("nombre") String nombre) {
+		
+		return boToDto.usuarioBoToDto(usuarioService.findByNombre(nombre));
 	}
 
 }

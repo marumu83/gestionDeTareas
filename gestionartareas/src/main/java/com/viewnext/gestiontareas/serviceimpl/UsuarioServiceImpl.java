@@ -65,4 +65,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return repositorio.findAll().stream().map(entityToBo::usuarioEntityToBo).toList();
 	}
 
+	@Override
+	public UsuarioBO findByNombre(String nombre) {
+
+		return entityToBo.usuarioEntityToBo(repositorio.findByNombre(nombre));
+	}
+
 }
