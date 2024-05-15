@@ -110,7 +110,7 @@ app.post('/update', async (req, res) => {
 });
 
 app.post('/registrarusuario', async (req, res) => {
-
+ 
   const { nombre, email, password} = req.body;
   try {
     console.log(req.body);
@@ -119,6 +119,8 @@ app.post('/registrarusuario', async (req, res) => {
       email,
       password,
     });
+    res.sendFile(path.join(__dirname, '../public/index.html'))
+ 
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al registrar al usuario');

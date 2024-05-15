@@ -33,18 +33,18 @@
                     <!--Login-->
                     <form action="/lista" class="formulario__login" method="get">
                         <h2>Iniciar Sesión</h2>
-                        <input id="nombre" type="text" placeholder="Nombre Usuario">
-                        <input id="password" type="password" placeholder="Contraseña">
+                        <input id="nombre" type="text" placeholder="Nombre Usuario" required>
+                        <input id="password" type="password" placeholder="Contraseña" required>
                         <button type="submit" id="iniciosesion">Entrar</button>
                     </form>
 
                     <!--Register-->
                     <form action="/registrarusuario" class="formulario__register" method="post">
                         <h2>Registrarse</h2>
-                        <input id="nombre" name="nombre" type="text" placeholder="Nombre Usuario">
-                        <input id="email" name="email" type="text" placeholder="Correo Electrónico">
-                        <input id="password" name="password" type="password" placeholder="Contraseña">
-                        <input id="reppassword" name="reppassword" type="password" placeholder="Repetir Contraseña">
+                        <input id="nombre" name="nombre" type="text" placeholder="Nombre Usuario" required>
+                        <input id="email" name="email" type="text" placeholder="Correo Electrónico" required>
+                        <input id="password" name="password" type="password" placeholder="Contraseña" required>
+                        <input id="reppassword" name="reppassword" type="password" placeholder="Repetir Contraseña" required>
                         <button type="submit" id="registro">Registrarse</button>
                     </form>
                 </div>
