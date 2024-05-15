@@ -5,10 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * Clase usuario objeto de transferencia de datos DTO
  * @author Manuel Rubio
  * @author Jorge Garrido
  *
  */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

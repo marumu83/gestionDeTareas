@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * Clase tarea objeto de transferencia de datos DTO
  * @author Manuel Rubio
  * @author Jorge Garrido
  *

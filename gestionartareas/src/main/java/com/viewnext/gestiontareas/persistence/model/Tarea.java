@@ -1,10 +1,4 @@
 package com.viewnext.gestiontareas.persistence.model;
-/**
- * @author Manuel Rubio
- * @author Javier Garrido
- * 
- * Clase que reprensenta le entidad Tarea de la base de datos
- */
 
 import java.sql.Date;
 
@@ -18,6 +12,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase que reprensenta le entidad Tarea de la base de datos
+ * @author Manuel Rubio
+ * @author Javier Garrido
+ * 
+ */
 
 @Data
 @AllArgsConstructor

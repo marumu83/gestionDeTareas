@@ -26,12 +26,34 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("/api/tareas")
 public class TareaController {
 	
+	/**
+	 * Instancia de la clase Tareaservice para llamar a
+	 * los metodos necesarios
+	 */
 	
 	private final TareaService tareaService;
 		
+	/**
+	 * Instancia de la clase mapeador de objeto
+	 * de negocio a objeto de transferencia de datos 
+	 */
+	
 	private final BoToDto boToDto;
+	
+	/**
+	 * Instancia de la clase mapeadora de objeto de
+	 * transferencia de datos a objeto de negocio
+	 */
 		
 	private final DtoToBo dtoToBo;
+	
+	/**
+	 * Constructor parametrizado que iyecta las instancias 
+	 * necesarias para responder a los endpoints
+	 * @param tareaService
+	 * @param boToDto
+	 * @param dtoToBo
+	 */
 	
 	public TareaController(TareaService tareaService, BoToDto boToDto, DtoToBo dtoToBo) {
 		this.tareaService=tareaService;
@@ -39,6 +61,13 @@ public class TareaController {
 		this.dtoToBo=dtoToBo;
 	}
 	
+	/**
+	 * Metodo publico que crea una nueva tarea, y devuelve la
+	 * tarea creada si se ha creado correctamente. 
+	 * @param TareaDTO tarea
+	 * @param request
+	 * @return ResponseEntity
+	 */
 	
 	@PostMapping("/nueva")
 	public ResponseEntity <TareaDTO> createTarea(@RequestBody TareaDTO tarea, HttpServletRequest request){
@@ -47,15 +76,26 @@ public class TareaController {
 		return ResponseEntity.ok(tarea);
 	}
 	
-	@GetMapping("/all")		
-	public List<TareaDTO> getAll(){
+	/**
+	 * Metodo publico que devuelve una lista de todas las tareas
+	 * registradas en la base de datos
+	 * @return List
+	 */
 	
+	@GetMapping("/all")		
+	public List<TareaDTO> getAll(){	
 
 		return tareaService.findAll().stream()
 		        .map(boToDto::tareaBoToDto).toList();
 
 	}
 	
+	/**
+	 * Metodo publico que devuelve una TareaDTO que es buscada
+	 * por su identificador en la base datos
+	 * @param id
+	 * @return TareaDTO
+	 */
 	
 	@GetMapping("/id/{id}")	
 	public TareaDTO getById(@PathVariable("id") int id){		
@@ -64,11 +104,23 @@ public class TareaController {
 
 	}
 	
+	
+	/**
+	 * Metodo publico que elimina una tarea de la base de datos
+	 * localizada por su id
+	 * @param int id
+	 */
 	@DeleteMapping("/eliminar/{id}")
 	public void deleteTarea(@PathVariable int id) {
 		
 		tareaService.deleteTarea(id);
 	}
+	
+	/**
+	 * Metodo publico que actualiza una tarea
+	 * @param TareaDTO tareaDTO  
+	 * @return TareaDTO 
+	 */
 
 	
 	@PutMapping("/update")

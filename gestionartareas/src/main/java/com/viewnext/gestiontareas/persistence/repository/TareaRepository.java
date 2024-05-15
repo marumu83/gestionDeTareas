@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 import com.viewnext.gestiontareas.persistence.model.Tarea;
 
 /**
+ *  * Interface que extiende de JpaRepository
  * @author Manuel Rubio
  * @author Jorge Garrido
- * Interface que extiende de JpaRepository
  */
 
 @Repository

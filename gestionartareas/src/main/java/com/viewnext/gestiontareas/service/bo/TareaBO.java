@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * Clase tarea de tipo objeto de negocio
  * @author Manuel Rubio
  * @author Jorge Garrido
  *

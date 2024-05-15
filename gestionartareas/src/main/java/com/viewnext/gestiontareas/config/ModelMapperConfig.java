@@ -1,15 +1,17 @@
 package com.viewnext.gestiontareas.config;
 
+
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import lombok.Data;
+
 /**
+ * Clase para configurar y crear como bean el mapeador de objetos
  * @author Manuel Rubio
  * @author Jorge Garrido
  *
  */
-import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import lombok.Data;
 
 @Data
 @Configuration

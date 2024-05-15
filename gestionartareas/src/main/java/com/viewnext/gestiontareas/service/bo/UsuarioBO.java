@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * Clase usuario de tipo objeto de negocio
  * @author Manuel Rubio
  * @author Jorge Garrido
  *
