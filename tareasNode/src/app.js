@@ -149,10 +149,12 @@ app.post('/login', async (req,res) => {
     console.log(usuarioBD);
     let nombreBD = usuarioBD.nombre;
     let passwordBD = usuarioBD.password;
-    if((nombre == nombreBD) && (password == passwordBD)){
+    if(password == passwordBD){
       const response = await axios.get(`http://localhost:8080/api/tareas/all`);
       const lista = response.data;
       res.render('lista', {lista:lista})
+    }else{
+      console.log('Contraseña o nombre de usuario incorrectos.');
     }
 
   }catch(error){
