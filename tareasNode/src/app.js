@@ -1,50 +1,52 @@
-const express = require('express')
-const app = express()
-const path = require('path')
+const express = require('express');
+const app = express();
+const path = require('path');
 const bodyParser = require('body-parser');
 const { route } = require('./routes/lista.routes');
 const axios = require('axios');
 
-//
-app.use(express.static(path.join(__dirname, '../public')))
+//Inicio de la app
+app.use(express.static(path.join(__dirname, '../public')));
 
 //Motor de plantillas Pug
-app.set('view engine', 'pug')
-app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
-//
+//BodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
 //Routes
-app.use(require('./routes/lista.routes'))
+app.use(require('./routes/lista.routes'));
+
+/////////////////////////Endpoints de Tareas//////////////////////////////////////
 
 app.post('/crear', async (req, res) => {
 
-    //se crean los valores de alta con el dia actual y por defecto no finalizada
-    let fechaAlta = new Date().toISOString().slice(0, 10);
-    let ultimaModificacion = new Date().toISOString().slice(0, 10);
-    let finalizada = Boolean(false);
+  //se crean los valores de alta con el dia actual y por defecto no finalizada
+  let fechaAlta = new Date().toISOString().slice(0, 10);
+  let ultimaModificacion = new Date().toISOString().slice(0, 10);
+  let finalizada = Boolean(false);
   
-    const { titulo, descripcion, fechaFin} = req.body;
-    try {
-      const response = await axios.post(`http://localhost:8080/api/tareas/nueva`, {
-        titulo,
-        descripcion,
-        fechaFin,
-        fechaAlta,
-        ultimaModificacion,
-        finalizada
-      });
-      const lis = await axios.get(`http://localhost:8080/api/tareas/all`);
-      const lista = lis.data;
-      res.render('lista', {lista:lista})
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Error al registrar tarea');
-    }
-  });
+  const { titulo, descripcion, fechaFin} = req.body;
+  try {
+    const response = await axios.post(`http://localhost:8080/api/tareas/nueva`, {
+      titulo,
+      descripcion,
+      fechaFin,
+      fechaAlta,
+      ultimaModificacion,
+      finalizada
+    });
+    const lis = await axios.get(`http://localhost:8080/api/tareas/all`);
+    const lista = lis.data;
+    res.render('lista', {lista:lista})
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al registrar tarea');
+  }
+});
 
 app.get('/lista', async (req, res)=>{
 
@@ -52,7 +54,7 @@ app.get('/lista', async (req, res)=>{
     const lista = response.data;
     res.render('lista', {lista:lista})
     
-})
+});
 
 app.post('/delete', async(req, res) =>{ 
   
@@ -66,7 +68,7 @@ app.post('/delete', async(req, res) =>{
      res.render('lista', {lista:lista})
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error al registrar tarea');
+    res.status(500).send('Error al eliminar tarea');
   }
 
 });
@@ -109,6 +111,8 @@ app.post('/update', async (req, res) => {
   }
 });
 
+///////////////////////////////////Cosas de Usuario////////////////////////////////////
+
 app.post('/registrarusuario', async (req, res) => {
  
   const { nombre, email, password} = req.body;
@@ -127,14 +131,45 @@ app.post('/registrarusuario', async (req, res) => {
   }
 });
 
+app.get('/listausuario', async (req, res)=>{
+
+  const response = await axios.get(`http://localhost:8080/api/usuarios/all`);
+  const lista = response.data;
+  res.render('listausers', {lista:lista})
+  
+})
+
+app.post('/login', async (req,res) => {
+
+  const { nombre, password } = req.body;
+  console.log({nombre, password});
+  try{
+    let temp = await axios.get(`http://localhost:8080/api/usuarios/nombre/${nombre}`);
+    let usuarioBD = temp.data;
+    console.log(usuarioBD);
+    let nombreBD = usuarioBD.nombre;
+    let passwordBD = usuarioBD.password;
+    if((nombre == nombreBD) && (password == passwordBD)){
+      const response = await axios.get(`http://localhost:8080/api/tareas/all`);
+      const lista = response.data;
+      res.render('lista', {lista:lista})
+    }
+
+  }catch(error){
+    console.error(error);
+    res.status(500).send('Contraseña o nombre de usuario incorrectos.');
+  }
+
+});
+
 // Redireccion por defecto si no existe la ruta
 app.use((req, res)=>{
   res.sendFile(path.join(__dirname, '../public/404.html'))
-})
+});
 
 app.listen(3000, ()=>{
 
   console.log('Servidor node levantado')
 
-})
+});
 

@@ -31,10 +31,10 @@
                 <!--Formulario de Login y registro-->
                 <div class="contenedor__login-register">
                     <!--Login-->
-                    <form action="/lista" class="formulario__login" method="get">
+                    <form action="/login" class="formulario__login" method="post">
                         <h2>Iniciar Sesión</h2>
-                        <input id="nombre" type="text" placeholder="Nombre Usuario" required>
-                        <input id="password" type="password" placeholder="Contraseña" required>
+                        <input id="nombre" name="nombre" type="text" placeholder="Nombre Usuario" required>
+                        <input id="password" name="password" type="password" placeholder="Contraseña" required>
                         <button type="submit" id="iniciosesion">Entrar</button>
                     </form>
 
