@@ -88,6 +88,12 @@ public class UsuarioController {
 		return boToDto.usuarioBoToDto(usuarioService.findByNombre(nombre));
 	}
 	
+	/**
+	 * Meotodo que busca un usuario de la base de 
+	 * datos por su email
+	 * @param String email
+	 * @
+	 */
 	@GetMapping("/email/{email}")
 	public UsuarioDTO getByEmail(@PathVariable ("email") String email) {
 		

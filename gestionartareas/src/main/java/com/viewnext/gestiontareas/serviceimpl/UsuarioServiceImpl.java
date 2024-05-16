@@ -47,7 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 */
 	@Override
 	public UsuarioBO insert(UsuarioBO usuarioBo) {
-		
+
 		return entityToBo.usuarioEntityToBo(repositorio.save(boToEntity.usuarioBoToEntity(usuarioBo)));
 
 	}
