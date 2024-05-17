@@ -38,7 +38,6 @@ public class AuthenticationController {
 		return ResponseEntity.ok(jwtDto);
 	}
 	
-	
-	
+	@
 
 }
