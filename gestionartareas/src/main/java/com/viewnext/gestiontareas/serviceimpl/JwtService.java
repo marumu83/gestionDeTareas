@@ -21,7 +21,6 @@ import io.jsonwebtoken.security.Keys;
  * @author Jorge Garrido
  *
  */
-@SuppressWarnings("deprecation")
 @Service
 public class JwtService {
 	
