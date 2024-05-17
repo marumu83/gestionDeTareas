@@ -2,7 +2,9 @@ package com.viewnext.gestiontareas.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +26,9 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	/**
 	 * Instancia de la clase UsuarioService para llamar a
@@ -71,6 +76,10 @@ public class UsuarioController {
 	@PostMapping("/nuevo")
 	public ResponseEntity<UsuarioDTO>  createUser(@RequestBody UsuarioDTO usuarioDTO, HttpServletRequest request){
 		
+
+		
+		usuarioDTO.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
+
 		usuarioService.insert(dtoToBo.usuarioDtoToBo(usuarioDTO));
 		
 		return ResponseEntity.ok(usuarioDTO);

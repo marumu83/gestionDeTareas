@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -51,8 +52,9 @@ public class Usuario implements UserDetails{
 	
 	private String password;
 	
-    @Enumerated(EnumType.STRING)
-    private Role role;
+	@Column(columnDefinition = "varchar(20) default 'USER'")
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

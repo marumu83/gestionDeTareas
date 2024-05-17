@@ -42,7 +42,7 @@ public class HttpSecutirtyConfig {
 				
 				authConfig.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();		
 				authConfig.requestMatchers(HttpMethod.GET, "/api/auth/prueba").permitAll();	
-				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/all").hasAnyRole("ADMIN");
+				authConfig.requestMatchers(HttpMethod.GET, "/api/usuarios/all").permitAll();	// hasAnyRole("ADMIN"); cambiarli tras pruebas
 				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/nuevo").permitAll();	
 				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/nombre").hasAnyRole("USER");
 				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/email").hasAnyRole("USER");
