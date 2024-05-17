@@ -2,6 +2,8 @@ package com.viewnext.gestiontareas.serviceimpl;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import com.viewnext.gestiontareas.persistence.repository.UsuarioRepositorio;
@@ -127,6 +129,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		return entityToBo.usuarioEntityToBo(repositorio.findByEmail(email));
 		
+	}
+	
+	@Override
+	public UserDetailsService userDetailsService() {
+		
+		return new UserDetailsService() {
+
+			@Override
+			public UserDetails loadUserByUsername(String nombre) {
+
+				return repositorio.findByNombre(nombre);
+			}
+			
+		};
 	}
 
 }

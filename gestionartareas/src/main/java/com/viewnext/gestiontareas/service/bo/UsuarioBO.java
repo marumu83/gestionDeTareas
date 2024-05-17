@@ -1,6 +1,8 @@
 package com.viewnext.gestiontareas.service.bo;
 
 
+import com.viewnext.gestiontareas.persistence.model.Role;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,4 +25,6 @@ public class UsuarioBO {
 	private String email;
 	
 	private String password;
+	
+	private Role role;
 }
