@@ -55,18 +55,12 @@ public class JwtService {
 	}
 	
 	public String extractUsername(String jwt) {
-		
 		return extractAllClaims(jwt).getSubject();
 
 	}
 
 	private Claims extractAllClaims(String jwt) {
-		
-		
-		return Jwts.parser().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody().getSubject();
-		
-		//1.56
-		
+		return Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody();
 
 	}
 
