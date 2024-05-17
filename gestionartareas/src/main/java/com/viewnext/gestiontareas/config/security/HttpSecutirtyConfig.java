@@ -40,11 +40,12 @@ public class HttpSecutirtyConfig {
 			.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
 			.authorizeHttpRequests( authConfig -> {
 				
-				authConfig.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();				
-				authConfig.requestMatchers(HttpMethod.POST, "/apir/usuarios/all").hasAnyRole("ADMIN");
-				authConfig.requestMatchers(HttpMethod.POST, "/apir/usuarios/nuevo").hasAnyRole("USER");
-				authConfig.requestMatchers(HttpMethod.POST, "/apir/usuarios/nombre").hasAnyRole("USER");
-				authConfig.requestMatchers(HttpMethod.POST, "/apir/usuarios/email").hasAnyRole("USER");
+				authConfig.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();		
+				authConfig.requestMatchers(HttpMethod.GET, "/api/auth/prueba").permitAll();	
+				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/all").hasAnyRole("ADMIN");
+				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/nuevo").permitAll();	
+				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/nombre").hasAnyRole("USER");
+				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/email").hasAnyRole("USER");
 				authConfig.requestMatchers(HttpMethod.POST, "/api/tareas/nueva").hasAnyRole("USER");
 				authConfig.requestMatchers(HttpMethod.POST, "/api/tareas/all").hasAnyRole("USER");
 				authConfig.requestMatchers(HttpMethod.POST, "/api/tareas/id").hasAnyRole("USER");
