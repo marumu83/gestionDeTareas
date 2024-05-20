@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const { route } = require('./routes/lista.routes');
 const axios = require('axios');
 const bcrypt = require('bcryptjs');
+require('dotenv').config({path:'/.env'});
+
+let url= process.env.URL;
 
 //Inicio de la app
 app.use(express.static(path.join(__dirname, '../public')));
@@ -20,6 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //Routes
 app.use(require('./routes/lista.routes'));
+
+//Variables 
+let authToken;
 
 /////////////////////////Endpoints de Tareas//////////////////////////////////////
 
@@ -117,7 +123,6 @@ app.post('/update', async (req, res) => {
 app.post('/registrarusuario', async (req, res) => {
  
   const role = "USER"
-  console.log(req.body)
   const { nombre, email, password} = req.body;
   try {
     const userData = {
@@ -126,14 +131,12 @@ app.post('/registrarusuario', async (req, res) => {
       password,
       role,
     };
-    console.log("contraseña", password)
       const response = await axios.post(`http://localhost:8080/api/usuarios/nuevo`, {
       nombre,
       email,
       password,
       role,
     });
-    console.log(userData)
     res.sendFile(path.join(__dirname, '../public/index.html'))
  
   } catch (error) {
@@ -153,21 +156,21 @@ app.get('/listausuario', async (req, res)=>{
 app.post('/login', async (req,res) => {
 
   const { username, password } = req.body;
-  console.log({username, password});
   try{
-      const userData = {
-        username,
-        password,
-      };
     const response = await axios.post(`http://localhost:8080/api/auth/login`, {
       username,
       password,
     });
-   
-      const listam = await axios.get(`http://localhost:8080/api/tareas/all`);
-      const lista = listam.data;
-      res.render('lista', {lista:lista})
- 
+    authToken = response.data.jwt;
+
+    let lis = await axios.get(`http://localhost:8080/api/tareas/all`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    });
+    
+    const lista = lis.data;
+    res.render('lista', {lista:lista})
 
   }catch(error){
     console.error(error);

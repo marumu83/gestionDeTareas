@@ -3,3 +3,4 @@
 /controllerNode/node_modules
 /.sonarlint
 .sonarlint
+.env
