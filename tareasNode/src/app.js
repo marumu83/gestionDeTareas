@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { route } = require('./routes/lista.routes');
 const axios = require('axios');
+const bcrypt = require('bcryptjs');
 
 //Inicio de la app
 app.use(express.static(path.join(__dirname, '../public')));
@@ -115,14 +116,24 @@ app.post('/update', async (req, res) => {
 
 app.post('/registrarusuario', async (req, res) => {
  
+  const role = "USER"
+  console.log(req.body)
   const { nombre, email, password} = req.body;
   try {
-    console.log(req.body);
-    const response = await axios.post(`http://localhost:8080/api/usuarios/nuevo`, {
+    const userData = {
       nombre,
       email,
       password,
+      role,
+    };
+    console.log("contraseña", password)
+      const response = await axios.post(`http://localhost:8080/api/usuarios/nuevo`, {
+      nombre,
+      email,
+      password,
+      role,
     });
+    console.log(userData)
     res.sendFile(path.join(__dirname, '../public/index.html'))
  
   } catch (error) {
@@ -141,21 +152,22 @@ app.get('/listausuario', async (req, res)=>{
 
 app.post('/login', async (req,res) => {
 
-  const { nombre, password } = req.body;
-  console.log({nombre, password});
+  const { username, password } = req.body;
+  console.log({username, password});
   try{
-    let temp = await axios.get(`http://localhost:8080/api/usuarios/nombre/${nombre}`);
-    let usuarioBD = temp.data;
-    console.log(usuarioBD);
-    let nombreBD = usuarioBD.nombre;
-    let passwordBD = usuarioBD.password;
-    if(password == passwordBD){
-      const response = await axios.get(`http://localhost:8080/api/tareas/all`);
-      const lista = response.data;
+      const userData = {
+        username,
+        password,
+      };
+    const response = await axios.post(`http://localhost:8080/api/auth/login`, {
+      username,
+      password,
+    });
+   
+      const listam = await axios.get(`http://localhost:8080/api/tareas/all`);
+      const lista = listam.data;
       res.render('lista', {lista:lista})
-    }else{
-      console.log('Contraseña o nombre de usuario incorrectos.');
-    }
+ 
 
   }catch(error){
     console.error(error);
@@ -174,4 +186,3 @@ app.listen(3000, ()=>{
   console.log('Servidor node levantado')
 
 });
-
