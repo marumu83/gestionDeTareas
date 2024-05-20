@@ -33,27 +33,14 @@ public class HttpSecutirtyConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
 		
-		http
-			.csrf(csrfConfig -> csrfConfig.disable())
-			.sessionManagement(sessionMangConfig -> sessionMangConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.authenticationProvider(authenticationProvider)
-			.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
-			.authorizeHttpRequests( authConfig -> {
-				
-				authConfig.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();		
-				authConfig.requestMatchers(HttpMethod.GET, "/api/auth/prueba").permitAll();	
-				authConfig.requestMatchers(HttpMethod.GET, "/api/usuarios/all").permitAll();	// hasAnyRole("ADMIN"); cambiarli tras pruebas
-				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/nuevo").permitAll();	
-				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/nombre").hasAnyRole("USER");
-				authConfig.requestMatchers(HttpMethod.POST, "/api/usuarios/email").hasAnyRole("USER");
-				authConfig.requestMatchers(HttpMethod.POST, "/api/tareas/nueva").hasAnyRole("USER");
-				authConfig.requestMatchers(HttpMethod.POST, "/api/tareas/all").hasAnyRole("USER");
-				authConfig.requestMatchers(HttpMethod.POST, "/api/tareas/id").hasAnyRole("USER");
-				authConfig.requestMatchers(HttpMethod.POST, "/api/tareas/eliminar").hasAnyRole("USER");
-				authConfig.requestMatchers(HttpMethod.POST, "/api/tareas/update").hasAnyRole("USER");
-				authConfig.anyRequest().denyAll();				
-			});				
-		
-		return http.build();
+				http.csrf(csrfConfig -> csrfConfig.disable())
+				.sessionManagement(
+						sessionMangConfig -> sessionMangConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authenticationProvider(authenticationProvider)
+				.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+					return http.build();
+
+
 	}
 }

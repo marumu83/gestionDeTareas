@@ -2,12 +2,14 @@ package com.viewnext.gestiontareas.controller;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.viewnext.gestiontareas.controller.dto.TareaDTO;
@@ -68,7 +70,7 @@ public class TareaController {
 	 * @param request
 	 * @return ResponseEntity
 	 */
-	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@PostMapping("/nueva")
 	public ResponseEntity <TareaDTO> createTarea(@RequestBody TareaDTO tarea, HttpServletRequest request){
 	
@@ -82,9 +84,10 @@ public class TareaController {
 	 * @return List
 	 */
 	
-	@GetMapping("/all")		
-	public List<TareaDTO> getAll(){	
-
+	@PreAuthorize("hasRole('ROLE_USER')")
+	@GetMapping("/all")
+	public List<TareaDTO> getAll() {
+		
 		return tareaService.findAll().stream()
 		        .map(boToDto::tareaBoToDto).toList();
 
@@ -96,7 +99,7 @@ public class TareaController {
 	 * @param id
 	 * @return TareaDTO
 	 */
-	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/id/{id}")	
 	public TareaDTO getById(@PathVariable("id") int id){		
 
@@ -110,6 +113,8 @@ public class TareaController {
 	 * localizada por su id
 	 * @param int id
 	 */
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@DeleteMapping("/eliminar/{id}")
 	public void deleteTarea(@PathVariable int id) {
 		
@@ -122,7 +127,7 @@ public class TareaController {
 	 * @return TareaDTO 
 	 */
 
-	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@PutMapping("/update")
     public TareaDTO updateById(@RequestBody TareaDTO tareaDTO) {
 				

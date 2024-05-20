@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,9 +76,7 @@ public class UsuarioController {
 	
 	@PostMapping("/nuevo")
 	public ResponseEntity<UsuarioDTO>  createUser(@RequestBody UsuarioDTO usuarioDTO, HttpServletRequest request){
-		
-
-		
+				
 		usuarioDTO.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
 
 		usuarioService.insert(dtoToBo.usuarioDtoToBo(usuarioDTO));
@@ -85,12 +84,14 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarioDTO);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/all")
 	public List<UsuarioDTO> getAll(){
 		
 		return usuarioService.findAll().stream().map(boToDto::usuarioBoToDto).toList();
 	}
 	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/nombre/{nombre}")
 	public UsuarioDTO getByName(@PathVariable ("nombre") String nombre) {
 		
@@ -103,6 +104,8 @@ public class UsuarioController {
 	 * @param String email
 	 * @
 	 */
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/email/{email}")
 	public UsuarioDTO getByEmail(@PathVariable ("email") String email) {
 		

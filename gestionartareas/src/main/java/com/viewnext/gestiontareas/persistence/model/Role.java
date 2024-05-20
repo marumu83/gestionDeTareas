@@ -7,6 +7,6 @@ package com.viewnext.gestiontareas.persistence.model;
  */
 public enum Role {
 	
-	ADMIN, USER
+	ADMIN, USER, GESTOR
 
 }
