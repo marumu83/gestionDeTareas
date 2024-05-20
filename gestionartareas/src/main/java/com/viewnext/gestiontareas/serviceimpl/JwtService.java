@@ -27,8 +27,6 @@ public class JwtService {
 	@Value("${security.jwt.secret-key}")
 	private String SECRET_KEY;
 	
-	
-
 	public String generateToken(Usuario usuario, Map<String, Object> stringObjectMap) {
 		
 		Date issuedAt = new Date(System.currentTimeMillis());
@@ -62,6 +60,5 @@ public class JwtService {
 		return Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody();
 
 	}
-
 
 }
