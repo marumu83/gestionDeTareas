@@ -74,7 +74,7 @@ public class UsuarioController {
      * @return ResponseEntity
      */
 
-    @PostMapping("/nuevo")
+    @PostMapping()
     public ResponseEntity<UsuarioDTO>  createUser(@RequestBody UsuarioDTO usuarioDTO, HttpServletRequest request){
 
         usuarioDTO.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
@@ -85,7 +85,7 @@ public class UsuarioController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/all")
+    @GetMapping()
     public List<UsuarioDTO> getAll(){
 
         return usuarioService.findAll().stream().map(boToDto::usuarioBoToDto).toList();
