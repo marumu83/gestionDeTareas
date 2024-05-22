@@ -72,7 +72,7 @@ public class TareaController {
      * @return ResponseEntity
      */
     //@PreAuthorize("hasRole('ROLE_USER')")
-    @PostMapping("/nueva")
+    @PostMapping()
     public ResponseEntity <TareaDTO> createTarea(@RequestBody TareaDTO tarea, HttpServletRequest request){
 
         tareaService.insert(dtoToBo.tareaDtoToBo(tarea));
@@ -86,7 +86,7 @@ public class TareaController {
      */
 
     //@PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/all")
+    @GetMapping()
     public List<TareaDTO> getAll() {
 
         return tareaService.findAll().stream()
