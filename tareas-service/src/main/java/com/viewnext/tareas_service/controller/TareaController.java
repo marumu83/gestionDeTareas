@@ -71,7 +71,7 @@ public class TareaController {
      * @param request
      * @return ResponseEntity
      */
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping()
     public ResponseEntity <TareaDTO> createTarea(@RequestBody TareaDTO tarea, HttpServletRequest request){
 
@@ -85,7 +85,7 @@ public class TareaController {
      * @return List
      */
 
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping()
     public List<TareaDTO> getAll() {
 
@@ -100,7 +100,7 @@ public class TareaController {
      * @param id
      * @return TareaDTO
      */
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/id/{id}")
     public TareaDTO getById(@PathVariable("id") int id){
 
@@ -128,7 +128,7 @@ public class TareaController {
      * @return TareaDTO
      */
 
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/update")
     public TareaDTO updateById(@RequestBody TareaDTO tareaDTO) {
 
