@@ -4,10 +4,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { route } = require('./routes/lista.routes');
 const axios = require('axios');
-const bcrypt = require('bcryptjs');
-require('dotenv').config({path:'/.env'});
-
-let url= process.env.URL;
 
 //Inicio de la app
 app.use(express.static(path.join(__dirname, '../public')));
@@ -23,9 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //Routes
 app.use(require('./routes/lista.routes'));
-
-//Variables 
-let authToken;
 
 /////////////////////////Endpoints de Tareas//////////////////////////////////////
 
@@ -122,20 +115,13 @@ app.post('/update', async (req, res) => {
 
 app.post('/registrarusuario', async (req, res) => {
  
-  const role = "USER"
   const { nombre, email, password} = req.body;
   try {
-    const userData = {
+    console.log(req.body);
+    const response = await axios.post(`http://localhost:8080/api/usuarios/nuevo`, {
       nombre,
       email,
       password,
-      role,
-    };
-      const response = await axios.post(`http://localhost:8080/api/usuarios/nuevo`, {
-      nombre,
-      email,
-      password,
-      role,
     });
     res.sendFile(path.join(__dirname, '../public/index.html'))
  
@@ -155,22 +141,21 @@ app.get('/listausuario', async (req, res)=>{
 
 app.post('/login', async (req,res) => {
 
-  const { username, password } = req.body;
+  const { nombre, password } = req.body;
+  console.log({nombre, password});
   try{
-    const response = await axios.post(`http://localhost:8080/api/auth/login`, {
-      username,
-      password,
-    });
-    authToken = response.data.jwt;
-
-    let lis = await axios.get(`http://localhost:8080/api/tareas/all`, {
-      headers: {
-        Authorization: `Bearer ${authToken}`
-      }
-    });
-    
-    const lista = lis.data;
-    res.render('lista', {lista:lista})
+    let temp = await axios.get(`http://localhost:8080/api/usuarios/nombre/${nombre}`);
+    let usuarioBD = temp.data;
+    console.log(usuarioBD);
+    let nombreBD = usuarioBD.nombre;
+    let passwordBD = usuarioBD.password;
+    if(password == passwordBD){
+      const response = await axios.get(`http://localhost:8080/api/tareas/all`);
+      const lista = response.data;
+      res.render('lista', {lista:lista})
+    }else{
+      console.log('Contraseña o nombre de usuario incorrectos.');
+    }
 
   }catch(error){
     console.error(error);
@@ -189,3 +174,4 @@ app.listen(3000, ()=>{
   console.log('Servidor node levantado')
 
 });
+
