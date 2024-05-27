@@ -1,15 +1,57 @@
-version: '3.'
+version: '4'
+
 services:
-
-  discoveryserver:
-    image: discovery
-    restart: always
+  discovery-server:
+    container_name: discovery-server
+    build: ./discovery-server
+    image: discovery-server
     ports:
-      - '8761:8761'
+      - 8761:8761
     networks:
-      - gestiontareas
+      - generics
 
+  api-gateway:
+    container_name: api-gateway
+    build: ./api-gateway
+    image: api-gateway
+    ports:
+      - 8084:8084
+    depends_on:
+      - discovery-server
+    networks:
+      - generics
+
+  register-db:
+    container_name: register-db
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: tareasdb
+      PMA_HOST: mysql
+    ports:
+      - 3307:3306
+    networks:
+      - generics
+
+  usuarios-service:
+    container_name: usuarios-service
+    build: ./usuarios-service
+    image: usuarios-service
+    ports:
+      - 8081:8081
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DATABASE_URL=jdbc:mysql://register-db:3306/tareasdb?useSSL=true
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=12345
+    depends_on:
+      - register-db
+      - discovery-server
+      - api-gateway
+    networks:
+      - generics
 
 networks:
-  gestiontareas:
+  generics:
     driver: bridge
