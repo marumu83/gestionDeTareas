@@ -1,0 +1,15 @@
+version: '3.'
+services:
+
+  discoveryserver:
+    image: discovery
+    restart: always
+    ports:
+      - '8761:8761'
+    networks:
+      - gestiontareas
+
+
+networks:
+  gestiontareas:
+    driver: bridge
