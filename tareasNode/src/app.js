@@ -37,7 +37,7 @@ app.post('/crear', async (req, res) => {
  
   const { titulo, descripcion, fechaFin} = req.body;
   try {
-    const response = await axios.post(`http://localhost:8080/api/tareas`, {
+    const response = await axios.post(`http://api-gateway:8084/api/tareas`, {
       titulo,
       descripcion,
       fechaFin,
@@ -45,7 +45,7 @@ app.post('/crear', async (req, res) => {
       ultimaModificacion,
       finalizada
     });
-    const lis = await axios.get(`http://localhost:8080/api/tareas`);
+    const lis = await axios.get(`http://api-gateway:8084/api/tareas`);
     const lista = lis.data;
     res.render('lista', {lista:lista})
   } catch (error) {
@@ -56,7 +56,7 @@ app.post('/crear', async (req, res) => {
  
 app.get('/lista', async (req, res)=>{
  
-    const response = await axios.get(`http://localhost:8080/api/tareas`);
+    const response = await axios.get(`http://api-gateway:8084/api/tareas`);
     const lista = response.data;
     res.render('lista', {lista:lista})
    
@@ -67,9 +67,9 @@ app.post('/delete', async(req, res) =>{
     const id = req.body.id;
     console.log(id)
   try {
-    const response = await axios.delete(`http://localhost:8080/api/tareas/eliminar/${id}`);
+    const response = await axios.delete(`http://api-gateway:8084/api/tareas/eliminar/${id}`);
      res.status(200);
-     const lis = await axios.get(`http://localhost:8080/api/tareas`);
+     const lis = await axios.get(`http://api-gateway:8084/api/tareas`);
      const lista = lis.data;
      res.render('lista', {lista:lista})
   } catch (error) {
@@ -83,7 +83,7 @@ app.post('/modificar', async(req, res) =>{
  
   const id = req.body.id;
   console.log(id)
-  let temp= await axios.get(`http://localhost:8080/api/tareas/id/${id}`);
+  let temp= await axios.get(`http://api-gateway:8084/api/tareas/id/${id}`);
   let tarea= temp.data
   console.log(tarea)  
   res.render('actualiza', {tarea:tarea});
@@ -99,7 +99,7 @@ app.post('/update', async (req, res) => {
   const { titulo, descripcion, fechaFin} = req.body;
   let finalizada = req.body.finalizada === "on";
   try {
-    const response = await axios.put(`http://localhost:8080/api/tareas/update`, {
+    const response = await axios.put(`http://api-gateway:8084/api/tareas/update`, {
       id,
       titulo,
       descripcion,
@@ -108,7 +108,7 @@ app.post('/update', async (req, res) => {
       ultimaModificacion,
       finalizada
     });
-    const lis = await axios.get(`http://localhost:8080/api/tareas`);
+    const lis = await axios.get(`http://api-gateway:8084/api/tareas`);
     const lista = lis.data;
     res.render('lista', {lista:lista})
   } catch (error) {
@@ -130,7 +130,7 @@ app.post('/registrarusuario', async (req, res) => {
       password,
       role,
     };
-      const response = await axios.post(`http://localhost:8080/api/usuarios`, {
+      const response = await axios.post(`http://api-gateway:8084/api/usuarios`, {
       nombre,
       email,
       password,
@@ -146,7 +146,7 @@ app.post('/registrarusuario', async (req, res) => {
  
 app.get('/listausuario', async (req, res)=>{
  
-  const response = await axios.get(`http://localhost:8080/api/usuarios`);
+  const response = await axios.get(`http://api-gateway:8084/api/usuarios`);
   const lista = response.data;
   res.render('listausers', {lista:lista})
  
@@ -156,13 +156,13 @@ app.post('/login', async (req,res) => {
  
   const { username, password } = req.body;
   try{
-    const response = await axios.post(`http://localhost:8080/api/auth/login`, {
+    const response = await axios.post(`http://api-gateway:8084/api/auth/login`, {
       username,
       password,
     });
     authToken = response.data.jwt;
  
-    let lis = await axios.get(`http://localhost:8080/api/tareas`, {
+    let lis = await axios.get(`http://api-gateway:8084/api/tareas`, {
       headers: {
         Authorization: `Bearer ${authToken}`
       }

@@ -52,6 +52,33 @@ services:
     networks:
       - generics
 
+  tareas-service:
+    container_name: tareas-service
+    build: ./tareas-service
+    image: tareas-service
+    ports:
+      - 8082:8082
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DATABASE_URL=jdbc:mysql://register-db:3306/tareasdb?useSSL=true
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=12345
+    depends_on:
+      - register-db
+      - discovery-server
+      - api-gateway
+    networks:
+      - generics
+
+  tareas-node:
+    container_name: tareas-node
+    build: ./tareasNode
+    image: tareas-node
+    ports:
+      - 3000:3000
+    networks:
+      - generics
+
 networks:
   generics:
     driver: bridge
